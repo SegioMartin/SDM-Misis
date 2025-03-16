@@ -3,9 +3,7 @@ package org.example.games
 import kotlin.math.pow
 import kotlin.random.Random
 
-class GeometryProgression(
-    welcomeMessage: String,
-) : Base(welcomeMessage) {
+class GeometryProgression : Base() {
     override val gameRules: String = "What number is missing in the progression?"
 
     override fun gameCycle() {

@@ -3,9 +3,7 @@ package games
 import org.example.games.Base
 import kotlin.random.Random
 
-class LCM(
-    welcomeMessage: String,
-) : Base(welcomeMessage) {
+class LCM : Base() {
     override val gameRules: String = "Find the smallest common multiple of given numbers."
 
     override fun gameCycle() {
