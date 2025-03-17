@@ -39,7 +39,7 @@ abstract class Base {
         println(WELCOME_MESSAGE)
         readPlayerName()
         println(gameRules)
-        while (true) {
+        for (i in 0..2) {
             gameCycle()
         }
     }
