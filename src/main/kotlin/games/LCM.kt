@@ -5,27 +5,7 @@ import kotlin.random.Random
 
 class LCM : Base() {
     override val gameRules: String = "Find the smallest common multiple of given numbers."
-
-    override fun gameCycle() {
-        val randomNumbers = getRandomQuestion()
-        println("Question: ${randomNumbers.joinToString(", ")}")
-        print("Your answer: ")
-        val playerAnswer = readln().toIntOrNull()
-        val rightAnswer = lcm(lcm(randomNumbers[0], randomNumbers[1]), randomNumbers[2])
-        val result = playerAnswer?.let { rightAnswer == playerAnswer }
-        when (result) {
-            true -> {
-                println("Correct!")
-            }
-            false -> {
-                println("'$playerAnswer' is wrong answer ;(. Correct answer was '$rightAnswer'.")
-                println("Let's try again, $playerName!")
-            }
-            null -> {
-                println("That's not an integer number ;(")
-            }
-        }
-    }
+    private var numbers: List<Int> = emptyList()
 
     private fun lcm(
         a: Int,
@@ -43,8 +23,10 @@ class LCM : Base() {
         return maxLcm
     }
 
-    private fun getRandomQuestion(
-        size: Int = 3,
-        until: Int = 10,
-    ): List<Int> = List(size) { Random.nextInt(1, until) }
+    override fun getRightAnswer(): String = lcm(lcm(numbers[0], numbers[1]), numbers[2]).toString()
+
+    override fun getRandomQuestion(): String {
+        numbers = List(3) { Random.nextInt(1, 10) }
+        return numbers.joinToString(", ")
+    }
 }

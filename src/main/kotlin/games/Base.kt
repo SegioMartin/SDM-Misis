@@ -6,6 +6,9 @@ import org.example.enums.GameType
 abstract class Base {
     companion object {
         const val WELCOME_MESSAGE = "Welcome to the Brain Games"
+        const val YOUR_ANSWER = "Your answer: "
+        const val ASK_FOR_NAME = "May I have your name? "
+        const val CORRECT_ANSWER = "Correct!"
 
         fun getGame(choice: String): Base? {
             val gameType = getGameTypeByChoice(choice)
@@ -36,19 +39,52 @@ abstract class Base {
     protected var playerName: String = ""
 
     fun startGame() {
-        println(WELCOME_MESSAGE)
-        readPlayerName()
-        println(gameRules)
+        welcomeUser()
         for (i in 0..2) {
-            gameCycle()
+            askQuestion()
+            val userAnswer = readln()
+            val rightAnswer = getRightAnswer()
+            val hasWin = checkAnswer(userAnswer, rightAnswer)
+            writeResult(hasWin, userAnswer, rightAnswer)
         }
     }
 
+    private fun welcomeUser() {
+        println(WELCOME_MESSAGE)
+        readPlayerName()
+        println(gameRules)
+    }
+
     private fun readPlayerName() {
-        print("May I have your name? ")
+        print(ASK_FOR_NAME)
         playerName = readln()
         println("Hello, $playerName!")
     }
 
-    abstract fun gameCycle()
+    private fun askQuestion() {
+        println("Question: ${getRandomQuestion()}")
+        print(YOUR_ANSWER)
+    }
+
+    private fun checkAnswer(
+        userAnswer: String,
+        rightAnswer: String,
+    ): Boolean = userAnswer == rightAnswer
+
+    private fun writeResult(
+        hasWin: Boolean,
+        userAnswer: String,
+        rightAnswer: String,
+    ) {
+        if (hasWin) {
+            println(CORRECT_ANSWER)
+        } else {
+            println("'$userAnswer' is wrong answer ;(. Correct answer was '$rightAnswer'")
+            println("Let's try again, $playerName!")
+        }
+    }
+
+    abstract fun getRightAnswer(): String
+
+    abstract fun getRandomQuestion(): String
 }
