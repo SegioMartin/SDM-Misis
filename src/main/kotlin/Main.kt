@@ -20,7 +20,7 @@ fun bfs(graph: Map<Node, List<Node>>, start: Node, goal: Node): List<Node>? {
         }
     }
 
-    return null // путь не найден
+    return null
 }
 
 fun dfs(graph: Map<Node, List<Node>>, start: Node, goal: Node): List<Node>? {
@@ -146,11 +146,11 @@ fun doConnections(graph: BipartiteGraph, target: Node) {
 
 fun main() {
     // Real
-    val (b, d) = Pair(9, 7) //real
+    val (b, d) = Pair(9, 7)
     val target = Node(5, 50)
 
     // Test
-//    val (b, d) = Pair(2, 4) //test
+//    val (b, d) = Pair(2, 4)
 //    val target = Node(2, 2)
 
     val graph = BipartiteGraph(b, d)
@@ -159,6 +159,8 @@ fun main() {
     val start = Node(0, 0)
 
     doSearches(graph, start, target)
+
+    println()
 
     doConnections(graph, target)
 }
