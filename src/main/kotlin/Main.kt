@@ -96,7 +96,7 @@ fun aStar(graph: Graph, start: Int, goal: Int): Pair<Int, List<Int>> {
 
 
 fun main() {
-    val n = 5
+    val n = 35
     val minEdges = 2 * n
     val graph = generateRandomGraph(n, minEdges)
 
